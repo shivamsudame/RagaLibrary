@@ -1,0 +1,118 @@
+/* Universal styles for all elements */
+
+@media screen and (min-width: 1920px) {
+    body, html { font-size: 1.2vw; }
+}
+
+@media screen and (min-width: 2560px) {
+    body, html { font-size: 1.1vw; }
+}
+
+@media screen and (min-width: 3840px) {
+    body, html { font-size: 1vw; }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  background: #f3f3f3;
+  flex-direction: column;
+  margin: 0;
+}
+
+
+/* Style for the LoginHeader class */
+.LoginHeader h4 {
+    font-weight: bold; /* Makes the header text bold */
+    font-size: 24px; /* Adjust the size as per your design */
+    margin: 0; /* Removes margin around the header */
+    color: #003366; /* Dark blue color */
+}
+}
+
+.Loginheader {
+    font-weight: bold;
+    font-size: 36px; /* Larger text for the header */
+    text-align: center; /* Centers the text */
+    background-color: #4CAF50; /* Header background color */
+    color: white; /* Text color */
+    padding: 20px 0; /* Adds space above and below the text */
+    width: 100%; /* Ensures it spans the entire width of the page */
+    margin: 0; /* Removes default margin */
+}
+
+
+
+/* Main container with form centered */
+.main {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;  /* Added padding for spacing */
+  width: 100%;
+  max-width: 500px;  /* Ensure the form doesn't get too wide */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  /* Center elements horizontally */
+}
+
+/* Blank space above the form */
+.blank-space {
+  height: 20px;
+}
+
+/* Button styling */
+Loginbutton {
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: #4CAF50;
+  width: 100%;  /* Makes the button the same width as the input fields */
+  font-size: 16px;
+}
+
+/* Forgot password link styling (smaller font and aligned right) */
+.Loginlink {
+  width: 100%;
+  text-align: right;
+}
+
+.Loginlink a {
+  font-size: 14px;  /* Smaller font size */
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+.Loginlink a:hover {
+  text-decoration: underline;
+}
+
+/* Style for the 'Create one here' link */
+.create-account {
+  font-weight: bold;
+  color: dodgerblue;
+}
+
+/* Style for the 'Don't have an account?' text */
+.Loginlink p {
+  font-size: 14px;  /* Smaller font size */
+  color: #555;
+}
+

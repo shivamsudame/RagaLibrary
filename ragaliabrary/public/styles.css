@@ -1,0 +1,532 @@
+@media screen and (min-width: 1920px) {
+    body, html { font-size: 1.2vw; }
+}
+
+@media screen and (min-width: 2560px) {
+    body, html { font-size: 1.1vw; }
+}
+
+@media screen and (min-width: 3840px) {
+    body, html { font-size: 1vw; }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.header {
+  min-height: 60px;
+  /* height: 10vh; */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  padding: 10px;
+  text-align: center;
+  background: dodgerblue;
+  color: white;
+  font-size: 15px;
+  display: block;
+}
+/* good upto this point */ 
+
+/* Ensure the container class uses flex properties to align items */
+.Logincontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for input fields and button to ensure they match width */
+.Logincontainer input[type="text"],
+.Logincontainer input[type="password"],
+.Logincontainer .login {
+  width: 100%; /* Sets both input and button to full container width */
+  padding: 10px; /* Adjust padding for consistency */
+  margin-top: 10px;
+  font-size: 15px;
+  box-sizing: border-box; /* Ensures padding doesn’t alter width */
+}
+
+.Loginlink {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Optional styling for spacing and alignment */
+.Logincontainer .login {
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.Logincontainer .login:hover {
+  background-color: darkblue; /* Optional hover effect */
+}
+
+.menu {
+    margin-top: 20px; /* Space between the header and buttons */
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    flex-wrap: wrap; /* Allow buttons to wrap if needed */
+}
+
+.menu-button {
+    margin: 10px; /* Space between buttons */
+    padding: 10px 20px; /* Button padding */
+    background-color: #224f18; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.menu-button:hover {
+    background-color: #0f0f0f; /* Darker shade on hover */
+}
+
+/* Main content */
+.main-content {
+  margin-top: 0; /* Make sure there's no top margin */
+  width: 80%; /* Takes the remaining space */
+  padding: 20px;
+  background-color: #fff; /* Main content background color */
+}
+
+/* Grid container */
+.left-sidebar-grid {
+    display: grid;
+    grid-template-areas:
+        'header'
+        'main-content'
+        'left-sidebar'
+        'footer';
+}
+
+/* General column padding */
+.left-sidebar-grid > * {
+    padding: 1rem;
+}
+
+/* Assign columns to grid areas */
+.left-sidebar-grid > .header {
+    grid-area: header;
+    background: #f97171;
+}
+.left-sidebar-grid > .main-content {
+    grid-area: main-content;
+    background: #fff;
+}
+.left-sidebar-grid > .left-sidebar {
+    grid-area: left-sidebar;
+    background: #f5d55f;
+}
+.left-sidebar-grid > .footer {
+    grid-area: footer;
+    background: #72c2f1;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+    .left-sidebar-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas:
+            'header header header'
+            'left-sidebar main-content main-content'
+            'footer footer footer';
+    }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;  /* Center horizontally */
+  align-items: center;  /* Center vertically */
+  height: 100vh;  /* Full viewport height */
+  background: #f0f2f5;
+}
+
+.my-page {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Arrange elements vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  max-width: 1000px; /* Maximum width */
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height to center vertically */
+}
+
+.my-page .text {
+  margin-bottom: 90px;
+}
+
+.my-page h1 {
+  color: #1877f2;
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.my-page p {
+  font-size: 1.75rem;
+  white-space: nowrap;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+form input {
+  height: 55px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  padding: 0 14px;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #1877f2;
+}
+
+::placeholder {
+  color: #777;
+  font-size: 1.063rem;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 15px;
+}
+
+.link .login {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #1877f2;
+  padding: 15px 0;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.link .login:hover {
+  background: #0d65d9;
+}
+
+form a {
+  text-decoration: none;
+}
+
+.link .forgot {
+  color: #1877f2;
+  font-size: 0.875rem;
+}
+
+.link .forgot:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.button {
+  margin-top: 25px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button a {
+  padding: 15px 20px;
+  background: #42b72a;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1.063rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.button a:hover {
+  background: #3ba626;
+}
+
+nav1 {
+    height: 300vh;
+    background-color: dodgerblue;
+    width: 250px;
+    padding: 10px;
+    transform: translateX(200px);
+    transition: transform .5s ease-in-out;
+}
+
+nav.active {
+    transform: translateX(0);
+}
+
+nav ul li {
+    padding: 10px;
+    font-weight: 500;
+}
+
+nav ul li a {
+    color: #fff;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Include only background and color */
+    display: block; /* Ensure it occupies full space */
+    padding: 10px; /* Define a consistent padding */
+}
+
+nav ul li a:hover {
+    background-color: #fff; /* Change background on hover */
+    color: dodgerblue; /* Change text color */
+}
+
+form {
+    padding: 15px;
+}
+
+.right {
+    height: 300px; /* Should be removed. Only for demonstration */
+    width: 100%;
+    max-width: 100%;
+    background-color: white;
+    padding: 10px;
+    padding-left: 260px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.nav {
+    height: 90vh;
+    width: 250px;
+    float: left;
+    background-color: dodgerblue;
+    padding: 10px;
+}
+
+/* New styles for raga list items */
+.li {
+    display: flex; /* Enable flexbox for alignment */
+    align-items: center; /* Center vertically */
+    white-space: nowrap; /* Prevent wrapping */
+    padding: 5px 0; /* Optional: Add some vertical spacing */
+}
+
+.favorite-icon img {
+    width: auto; /* Allow for natural scaling */
+    height: 2em; /* Proportionally sized based on font size */
+    margin-right: 0; /* Remove space */
+    vertical-align: middle;
+}
+	
+.raga-link {
+    margin-left: 0; /* Ensure no additional left margin */
+}
+
+
+/* Center the form horizontally */
+.center-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally centers the form contents */
+    margin-top: 50px; /* Optional: add margin for some top spacing */
+}
+
+/* Style for the input field and button */
+.center-form input[type="text"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 200px;
+}
+
+/* Style for the input field and button */
+.center-form input[type="text"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 360px;
+}
+
+.description-box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 20px auto; /* Adds margin on top and bottom, centers the box */
+      width: 80%; /* Adjusts the width to leave margins on the sides */
+      background-color: #f9f9f9; /* Light background color for the box */
+      border-radius: 8px; /* Optional: rounds the corners of the box */
+    }
+	
+	
+form {
+  text-align: center; /* Center the form content */
+  margin-top: 0; /* Remove extra space above the buttons */
+  display: flex;
+  justify-content: center; /* Center buttons within the form */
+   align-items: center; /* Vertically center buttons */
+}
+
+.search-btn, .clear-btn {
+  display: inline-block; /* Make the buttons sit next to each other */
+  margin: 0 5px; /* Reduce spacing between the buttons */
+  padding: 5px 10px; /* Reduce button padding */
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+    align-items: center; /* Center content vertically */
+	    height: auto; /* Ensure height adjusts to content */
+	 max-height: 60px; /* Set a minimum height to ensure compactness */
+}
+
+.search-btn:hover, .clear-btn:hover {
+  background-color: #0056b3;
+}
+
+.centered-form-container {
+  display: flex;
+  justify-content: center;
+   margin-top: 10px; /* Negative margin to pull up content */
+  
+  padding: 0; /* No padding to remove extra space */
+  border: none; /* No border */
+  height: auto; /* Automatically adjust height based on content */
+  margin-bottom: 0;
+    height: auto; /* Ensure height adjusts to content */
+  max-height: 60px; /* Set a minimum height to ensure compactness */
+}
+
+
+
+
+/* new */
+
+
+
+body.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  background: #f3f3f3;
+  flex-direction: column;
+  margin: 0;
+}
+
+
+/* Style for the LoginHeader class */
+.LoginHeader h4 {
+    font-weight: bold; /* Makes the header text bold */
+    font-size: 24px; /* Adjust the size as per your design */
+    margin: 0; /* Removes margin around the header */
+    color: #003366; /* Dark blue color */
+}
+}
+
+.Loginheader {
+    font-weight: bold;
+    font-size: 36px; /* Larger text for the header */
+    text-align: center; /* Centers the text */
+    background-color: #4CAF50; /* Header background color */
+    color: white; /* Text color */
+    padding: 20px 0; /* Adds space above and below the text */
+    width: 100%; /* Ensures it spans the entire width of the page */
+    margin: 0; /* Removes default margin */
+}
+
+
+
+/* Main container with form centered */
+.Loginmain {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;  /* Added padding for spacing */
+  width: 100%;
+  max-width: 500px;  /* Ensure the form doesn't get too wide */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  /* Center elements horizontally */
+}
+
+/* Blank space above the form */
+.blank-space {
+  height: 20px;
+}
+
+/* Button styling */
+.Loginbutton {
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: #4CAF50;
+  width: 100%;  /* Makes the button the same width as the input fields */
+  font-size: 16px;
+}
+
+
+/* Forgot password link styling (smaller font and aligned right) */
+.Loginlink {
+  width: 100%;
+  text-align: right;
+}
+
+.Loginlink a {
+  font-size: 14px;  /* Smaller font size */
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+.Loginlink a:hover {
+  text-decoration: underline;
+}
+
+/* Style for the 'Create one here' link */
+.create-account {
+  font-weight: bold;
+  color: dodgerblue;
+}
+
+/* Style for the 'Don't have an account?' text */
+.Loginlink p {
+  font-size: 14px;  /* Smaller font size */
+  color: #555;
+}
