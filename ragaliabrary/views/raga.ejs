@@ -1,0 +1,89 @@
+<head>   
+    <div class="header">
+        <h1>Raga Music Library</h1>
+        <button onclick="window.location.href='/raga'" class="menu-button">All Ragas</button>
+        <button onclick="window.location.href='/favragas'" class="menu-button">Favourite Ragas</button>
+        <button onclick="window.location.href='/tala'" class="menu-button">Talas</button>
+        <button onclick="window.location.href='/search'" class="menu-button">Search</button>
+        <button onclick="window.location.href='/logout'" class="menu-button">Logout</button>
+    </div>
+</head>
+
+<script>
+    function toggleFavorite(ragaId, isFavorite) {
+        const url = isFavorite ? `/raga/unfavorite/${ragaId}` : `/raga/favorite/${ragaId}`;
+
+        fetch(url, {
+            method: 'POST',
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url; // Redirect if necessary
+            } else {
+                // Optionally update the favorite icon without a page refresh
+                const favoriteIcon = event.target.closest('.favorite-icon').querySelector('img');
+                favoriteIcon.src = isFavorite ? '/notfavraga.png' : '/favraga.png'; // Toggle icon
+                favoriteIcon.alt = isFavorite ? 'Not Favorite' : 'Favorite';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+<div class="row">
+    <nav class="active">
+        <div class="nav">
+            <h3>Ragas List</h3>
+			<ul>    
+                <% ragas.forEach((raga, index) => { %>
+				<li class="li">
+					<!-- Display image based on the 'favorite' status -->
+					<a href="#" class="favorite-icon" onclick="toggleFavorite(<%= raga.id %>, <%= raga.favorite %>)">
+						<img src="<%= raga.favorite ? '/favraga.png' : '/notfavraga.png' %>" alt="<%= raga.favorite ? 'Favorite' : 'Not Favorite' %>" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: bottom;" />
+					</a>
+					<a href="#" class="raga-link" data-id="<%= raga.id %>" style="margin-left: 15px;"><%= raga.name %></a>
+				</li>
+                <% }); %>
+            </ul>
+        </div>
+
+        <!-- Content Column for Raga Details -->
+        <div class="right">
+            <div class="w3-container" id="raga-content">
+                <h3>Raga Name: <span id="raga-name"></span> | Notes: <span id="raga-notes"></span></h3>
+                <br><br><br>
+                <p id="raga-description"></p>
+                <br>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<script>
+    // Load the first raga by default
+    document.addEventListener('DOMContentLoaded', () => {
+        const firstRagaId = <%= ragas[0].id %>; // Get the ID of the first raga
+        loadRagaDetails(firstRagaId); // Load the details for the first raga
+
+        // Add click event listeners to the raga links
+        document.querySelectorAll('.raga-link').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior
+                const ragaId = event.target.getAttribute('data-id');
+                loadRagaDetails(ragaId);
+            });
+        });
+    });
+
+    // Function to load raga details
+    function loadRagaDetails(ragaId) {
+        // Fetch the raga details from the server
+        fetch(`/raga/${ragaId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('raga-name').innerText = data.name || 'No name available';
+                document.getElementById('raga-description').innerText = data.description || 'No description available';
+                document.getElementById('raga-notes').innerText = data.notes || 'No notes available';
+            });
+    }
+</script>

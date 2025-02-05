@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .description-box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 20px auto;
+      width: 80%;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .button {
+      margin: 5px;
+      padding: 10px;
+      width: 50px;
+    }
+
+    .selected {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .search-btn, .clear-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .search-btn:hover, .clear-btn:hover {
+      background-color: #0056b3;
+    }
+
+    #topImage {
+      width: 500px; /* Adjust the width as needed */
+      height: auto; /* Keeps the aspect ratio */
+    }
+
+    .box {
+      background-color: white;
+      border: 2px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 60%;
+      margin: 0 auto;
+    }
+  </style>
+
+  <div class="header">
+    <h1>Raga Music Library</h1>
+    <button onclick="window.location.href='/raga'" class="menu-button">All Ragas</button>
+    <button onclick="window.location.href='/favragas'" class="menu-button">Favourite Ragas</button>
+    <button onclick="window.location.href='/tala'" class="menu-button">Talas</button>
+    <button onclick="window.location.href='/search'" class="menu-button">Search</button>
+    <button onclick="window.location.href='/logout'" class="menu-button">Logout</button>
+    <br>
+  </div>
+</head>
+<body>
+  <!-- Box container to center buttons -->
+  <div class="box">
+    <!-- Image placed above the buttons -->
+    <img src="/keyboard.png" alt="Your Image" id="topImage">
+
+    <!-- Container for the buttons -->
+    <div id="buttonContainer"></div>
+     </div>
+    <!-- Moved the centered form container here -->
+    <div class="centered-form-container">
+      <!-- Form to submit the selected values -->
+      <form action="/search" method="POST" onsubmit="setSelectedValue()">
+        <input type="hidden" name="selectedValues" id="hiddenSelectedValues">
+        <div class="button-container">
+          <button type="submit" class="search-btn">Search Ragas</button>
+          <button type="button" class="clear-btn" id="clearBtn">Clear</button>
+        </div>
+      </form>
+    </div>
+
+
+  <% if (raga) { %>
+    <div class="description-box">
+      <h3>Raga Name: <span id="raga-name"><%= raga.name %></span> | Notes: <span id="raga-notes"><%= raga.notes %></span></h3>
+      <br>
+      <p>Description: <span id="raga-description"><%= raga.description || "No description available" %></span></p>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        loadRagaDetails(<%= raga.id %>);
+      });
+    </script>
+  <% } %>
+
+  <% if (errorMessage) { %>
+    <p><%= errorMessage %></p>
+  <% } %>
+
+</body>
+
+<script>
+  // Function to load raga details
+  function loadRagaDetails(ragaId) {
+    fetch(`/raga/${ragaId}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('raga-name').innerText = data.name || 'No name available';
+        document.getElementById('raga-description').innerText = data.description || 'No description available';
+        document.getElementById('raga-notes').innerText = data.notes || 'No notes available';
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttonContainer = document.getElementById('buttonContainer');
+    const selectedValuesDisplay = document.getElementById('selectedValues'); // Ensure this exists in the DOM
+    const clearBtn = document.getElementById('clearBtn');
+    const hiddenSelectedValues = document.getElementById('hiddenSelectedValues');
+
+    // Array of custom labels for the buttons (12 items)
+    const customLabels = ['S', 'r', 'R', 'g', 'G', 'm', 'M', 'P', 'd', 'D', 'n', 'N'];
+
+    // Array to hold selected values
+    let selectedValues = [];
+
+    // Function to create 12 buttons with custom labels
+    function createButtons() {
+      for (let i = 0; i < customLabels.length; i++) {
+        const button = document.createElement('button');
+        const label = customLabels[i];
+        button.value = label;
+        button.textContent = label;
+        button.classList.add('button');
+
+        // Always select the first button by default
+        if (i === 0) {
+          button.classList.add('selected');
+          selectedValues.push(label);
+        }
+
+        button.addEventListener('click', (event) => {
+          event.preventDefault(); // Prevent the default form submission
+          toggleButton(button, i);
+        });
+        buttonContainer.appendChild(button);
+      }
+
+      updateSelectedValuesDisplay();
+    }
+
+    function toggleButton(button, index) {
+      const value = button.value;
+
+      // Prevent unselecting the first button
+      if (index === 0) return;
+
+      if (button.classList.contains('selected')) {
+        button.classList.remove('selected');
+        selectedValues = selectedValues.filter(val => val !== value);
+      } else {
+        button.classList.add('selected');
+        selectedValues.push(value);
+      }
+
+      updateSelectedValuesDisplay();
+    }
+
+    function updateSelectedValuesDisplay() {
+      selectedValuesDisplay.textContent = selectedValues.join(', '); // Ensure selectedValuesDisplay is defined
+    }
+
+    // Set selectedValues in the hidden input when the form is submitted
+    window.setSelectedValue = function() {
+      hiddenSelectedValues.value = selectedValues.join(''); // Assign the selected values to the hidden input
+    };
+
+    // Clear selections except the first button
+    clearBtn.addEventListener('click', function() {
+      const buttons = buttonContainer.querySelectorAll('.button');
+      selectedValues = [buttons[0].value]; // Keep the first button's value
+      buttons.forEach((button, index) => {
+        if (index !== 0) {
+          button.classList.remove('selected');
+        } else {
+          button.classList.add('selected'); // Keep the first button selected
+        }
+      });
+      updateSelectedValuesDisplay();
+    });
+
+    // Create buttons on page load
+    createButtons();
+  });
+</script>
+</html>

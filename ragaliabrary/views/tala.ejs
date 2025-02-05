@@ -1,0 +1,82 @@
+<head>   
+    <div class="header">
+        <h1>Raga Music Library</h1>
+        <button onclick="window.location.href='/raga'" class="menu-button">All Ragas</button>
+        <button onclick="window.location.href='/favragas'" class="menu-button">Favourite Ragas</button>
+        <button onclick="window.location.href='/tala'" class="menu-button">Talas</button>
+        <button onclick="window.location.href='/search'" class="menu-button">Search</button>
+        <button onclick="window.location.href='/logout'" class="menu-button">Logout</button>
+    </div>
+</head>
+
+
+<% title = 'Talas' %>
+<div class="row">
+    <nav class="active">
+  <div class="nav">
+
+	  <h3>Talas List</h3>
+        <ul>    
+			<% talas.forEach((tala, index) => { %>
+				<li class="li">
+					<a href="#" class="tala-link" data-id="<%= tala.id %>"><%= tala.name %></a>
+				</li>
+			<% }); %>
+        </ul>
+
+	</div>
+        <!-- Content Column for Tala Details -->
+<div class="right">
+<div class="w3-container"  id="tala-content">	
+			<h3>Tala Name: <span id="name"></span> | Betas: <span id="beats"></span></h3
+			<br><br><br>
+            <p id="description"></p>
+			<br>
+
+			
+</div>
+</div>
+</div>
+
+<script>
+// Function to load tala details
+function loadTalaDetails(talaId) {
+    // Fetch the tala details from the server
+    fetch(`/tala/${talaId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('description').innerText = data.description;
+            document.getElementById('beats').innerText = data.beats;
+        });
+}
+
+// Load the first tala by default
+document.addEventListener('DOMContentLoaded', () => {
+    const firstTalaId = <%= talas[0].id %>; // Get the ID of the first tala
+    loadTalaDetails(firstTalaId); // Load the details for the first tala
+
+    // Add click event listeners to the tala links
+    document.querySelectorAll('.tala-link').forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            const talaId = event.target.getAttribute('data-id');
+            loadTalaDetails(talaId);
+        });
+    });
+});
+</script>
+
+<style>
+/* Add some basic styling */
+.container {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+</style>

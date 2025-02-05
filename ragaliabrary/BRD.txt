@@ -1,0 +1,15 @@
+I am a student and need help with a computer science project. I want you to code a new web app that I want to host on my windows laptop and then deploy on Azure. the project should use Node.js v20. and MSQL Version 8 database to store the data. Provide me detailed code and steps to configure the website locally.
+
+The application will have a login page called "Ragaliabrary" that will need a user management feature for user login including create new login, forget password. The users/passwords will be stored in database and users will need to be authenticated against the database record. Login page should have a title "Raga Liabraray" centered and a space for image to add at a later stage. 
+
+Once the user is autheticated, then it should load a new page "menu" with the same header and 4 buttons at the top. menu page will have left naviation for content header to load from the db tables and content details to be loaded based in the content frame based on which content header user clicks. all the pages should always have the same 4 buttons so the user can go from one page to another.
+
+1st button "Raga" will take the user to "raga" page. 2nd button "Tala" will take the user to "Tala" page. 3rd button "Search" will take the user "Search" page. 4th button will logout the user. 
+The raga page on load should build the left naviation using table raga which will have a unique id integer and then raga name, raga description string and raga notes string. The left naviation should load all raga names. uplon load it will select the 1st record in the left naviation and display the corrosponding raga description. The user should have a way to select/unselect a raga to add to the user favorites raga list. a toggle should be provided so the logged in user can see the whole raga list or toggle to see the users favorites ragas that the user has selected.  The user raga favorites should be saved in the database.
+
+2nd button "Tala" will take the user to "Tala" page. it will use the same page format similar to Raga page. 
+The tala page on load should build the left naviation using table tala which will have a unique id integer and then tala name and tala description string. The left naviation should load all tala names. uplon load it will select the 1st record in the left naviation and display the corrosponding tala description. 
+
+3rd button "Search" will take the user to a "search" page. this page will use the same page format as the Raga page but will not have left naviation but a search field for the user to enter a string and a "Search Raga" button. Upon click of the "search raga" button, the code will search the user entered string in the raga table in the column raga notes string and display the 1st matching record.
+
+make sure you provide the entire code and do not leave anything unfinished

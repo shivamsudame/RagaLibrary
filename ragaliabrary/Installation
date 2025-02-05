@@ -1,0 +1,122 @@
+
+
+
+
+Technology Stack
+
+Frontend:
+HTML, CSS, and EJS (Embedded JavaScript) for templating
+JavaScript for client-side interactivity
+Basic form-based UI interactions
+
+Backend:
+Node.js and Express.js framework for server-side logic
+Database: MySQL 
+
+ragaliabrary/
+│
+├── app.js                   # Entry point for the application (main server file)
+├── package.json              # Project dependencies and scripts
+├── views/                    # Folder for all EJS templates (frontend)
+│   ├── raga.ejs              # Page for viewing all ragas and marking them as favorites
+│   ├── search.ejs            # Page for searching ragas by musical notes
+│   └── layout.ejs            # Common layout file (optional)
+├── routes/                   # Routing logic for the application
+│   └── routes.js             # Defines all application routes (GET/POST)
+├── public/                   # Public assets (CSS, images)
+│   ├── styles.css            # Custom CSS for styling the pages
+│   ├── favraga.png           # Favorite raga icon
+│   └── notfavraga.png        # Not favorite raga icon
+├── models/                   # Database interaction logic (models)
+│   └── ragaModel.js          # Methods for querying ragas from MySQL
+└── config/                   # Database and environment configuration files
+    └── db.js                 # MySQL database connection setup
+	
+	
+Routes File: routes/routes.js
+
+HTTP Method	Route	Description
+GET	/raga	Displays all ragas
+GET	/favragas	Displays all favorite ragas
+POST	/raga/favorite/:id	Marks a raga as favorite
+POST	/raga/unfavorite/:id	Unmarks a raga as favorite
+GET	/tala	Displays all talas
+GET	/search	Displays the search form page
+POST	/search	Handles search request and displays search results
+
+
+
+
+Install MSQL Version 8 https://dev.mysql.com/downloads/windows/installer/8.0.html
+SQL Root password Shivam123!
+
+
+https://nodejs.org/en
+ensure that you install the npm package manager as well.
+
+create folder RagaLibrary
+
+Initialize a Node.js Project: npm init -y
+
+Install packages 
+npm install express mysql2 bcryptjs express-session body-parser ejs
+npm install express-ejs-layouts
+npm install dotenv
+
+CREATE DATABASE ragalibrary;
+USE ragalibrary;
+
+-- Create User table
+CREATE TABLE User (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    favorites VARCHAR(255) DEFAULT NULL
+);
+
+-- Create Raga table
+CREATE TABLE Raga (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    notes TEXT NOT NULL
+);
+
+-- Create Tala table
+CREATE TABLE Tala (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);
+
+
+http://localhost:3000/search
+
+					npm install @sendgrid/mail
+
+					sendgrid recovery code
+
+					H2T11NZPZWG3R2FR45D3ZLEU
+
+					API key 
+					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
+
+
+
+npm install emailjs-com
+https://dashboard.emailjs.com/admin
+service_t0m715o
+
+API KEY - r_rNk644xmodgY-sc
+
+
+
+Mailgun
+Ilovesai.1008!
+7982863ac3ffe4f0adecfd2906c44093-79295dd0-6507de52
+
+sandbox17fc03b73bcc43f385816f7f68bb572d.mailgun.org
+npm install mailgun.js
+
+
+

@@ -1,0 +1,77 @@
+<head>   
+  <div class="header">
+    <h1>Raga Music Library</h1>
+    <button onclick="window.location.href='/raga'" class="menu-button">All Ragas</button>
+    <button onclick="window.location.href='/favragas'" class="menu-button">Favourite Ragas</button>
+    <button onclick="window.location.href='/tala'" class="menu-button">Talas</button>
+    <button onclick="window.location.href='/search'" class="menu-button">Search</button>
+    <button onclick="window.location.href='/logout'" class="menu-button">Logout</button>
+  </div>
+</head>
+
+<% title = 'Favorite Ragas' %>
+<div class="row">
+    <nav class="active">
+        <div class="nav">
+            <h3>Fav Ragas List</h3>
+            <ul>    
+                <% ragas.forEach((raga) => { %>
+                    <li class="li">
+                        <!-- Display image based on the 'favorite' status -->
+                        <% if (raga.favorite) { %>
+                            <img src="/favraga.png" alt="Favorite" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: bottom;" />
+                        <% } else { %>
+                            <img src="/favraga.png" alt="Not Favorite" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: bottom;" />
+                        <% } %>
+                        <a href="#" class="raga-link" data-id="<%= raga.id %>"><%= raga.name %></a>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+
+        <!-- Content Column for Raga Details -->
+        <div class="right">
+            <div class="w3-container" id="raga-content">
+                <h3>Raga Name: <span id="raga-name"></span> | Notes: <span id="raga-notes"></span></h3>
+                <br><br><br>
+                <p id="raga-description"></p>
+                <br>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if there are any ragas available
+        <% if (ragas && ragas.length > 0) { %>
+            const firstRagaId = <%= ragas[0].id %>; // Get the ID of the first raga
+            loadRagaDetails(firstRagaId); // Load the details for the first raga
+
+            // Add click event listeners to the raga links
+            document.querySelectorAll('.raga-link').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default link behavior
+                    const ragaId = event.target.getAttribute('data-id');
+                    loadRagaDetails(ragaId);
+                });
+            });
+        <% } else { %>
+            document.getElementById('raga-name').innerText = 'No favorite ragas found.';
+            document.getElementById('raga-description').innerText = '';
+            document.getElementById('raga-notes').innerText = '';
+        <% } %>
+    });
+
+    // Function to load raga details
+    function loadRagaDetails(ragaId) {
+        // Fetch the raga details from the server
+        fetch(`/raga/${ragaId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('raga-name').innerText = data.name || 'No name available';
+                document.getElementById('raga-description').innerText = data.description || 'No description available';
+                document.getElementById('raga-notes').innerText = data.notes || 'No notes available';
+            });
+    }
+</script>
